@@ -17,7 +17,7 @@ Shader "Hidden/FlyVision"
 			#pragma vertex vert
 			#pragma fragment frag
 
-			#define R .1
+			#define R .06
 			#define SQRT3 1.732050807
 			#define PI 3.141592653
 
@@ -86,18 +86,24 @@ Shader "Hidden/FlyVision"
 				}
 				
 				float2 uv = i.uv - h1;
-				uv.x += .5 * SQRT3*R;
-				uv.y += R;
-				float aperture = 178.0;
-				float apertureHalf = 0.5 * aperture * (PI / 180.0);
-				float maxFactor = sin(apertureHalf);
+				//uv.x += .5 * SQRT3*R;
+				//uv.y += R;
+				float2 coords = uv;
+				coords = (coords - 0.5*R) * 2.0;
+
+				float2 realCoordOffs;
+				realCoordOffs.x = (1 - coords.y * coords.y) * 1 * (coords.x);
+				realCoordOffs.y = (1 - coords.x * coords.x) * 1 * (coords.y);
+				uv -= realCoordOffs*R;
 
 				uv += (i.uv - 1);
+
+
 				//fixed4 col = fixed4(odd, 0, 0, 1);
-				fixed4 col = tex2D(_MainTex, uv) - length(uv-.5);
+				fixed4 col = tex2D(_MainTex, uv) - length(2*uv-1)*.8;
 
 				//Reduce Reb chanel
-				col.x = sqrt( 16 * col.x)/16;
+				col.x = sqrt( 16 * col.x)/13;
 				return col;
 			}
 			ENDCG
