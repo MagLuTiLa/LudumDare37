@@ -19,6 +19,7 @@ Shader "Hidden/FlyVision"
 
 			#define R .1
 			#define SQRT3 1.732050807
+			#define PI 3.141592653
 
 			#include "UnityCG.cginc"
 
@@ -56,14 +57,18 @@ Shader "Hidden/FlyVision"
 			{
 				i.uv += 1;
 				int2 grid;
+
+				//Estimate hex coordinate
 				grid.y = i.uv.y / (1.5*R);
 				int odd = grid.y&1;
 				grid.x = i.uv.x / (SQRT3 * R) - odd*.5;
 
+				//Find possible centers of hexagons
 				float2 h1 = hexCenter(grid, odd);
 				float2 h2 = hexCenter(grid + int2(1,0), odd);
 				float2 h3 = hexCenter(grid + int2(odd, 1), 1^odd);
 
+				//Find closest center
 				float d1 = (h1.x - i.uv.x)*(h1.x - i.uv.x) + (h1.y - i.uv.y)*(h1.y - i.uv.y);
 				float d2 = (h2.x - i.uv.x)*(h2.x - i.uv.x) + (h2.y - i.uv.y)*(h2.y - i.uv.y);
 				float d3 = (h3.x - i.uv.x)*(h3.x - i.uv.x) + (h3.y - i.uv.y)*(h3.y - i.uv.y);
@@ -83,9 +88,16 @@ Shader "Hidden/FlyVision"
 				float2 uv = i.uv - h1;
 				uv.x += .5 * SQRT3*R;
 				uv.y += R;
+				float aperture = 178.0;
+				float apertureHalf = 0.5 * aperture * (PI / 180.0);
+				float maxFactor = sin(apertureHalf);
+
+				uv += (i.uv - 1);
 				//fixed4 col = fixed4(odd, 0, 0, 1);
-				fixed4 col = tex2D(_MainTex, uv);
-				//col.x = 1-sqrt(d3)/R;
+				fixed4 col = tex2D(_MainTex, uv) - length(uv-.5);
+
+				//Reduce Reb chanel
+				col.x = sqrt( 16 * col.x)/16;
 				return col;
 			}
 			ENDCG
