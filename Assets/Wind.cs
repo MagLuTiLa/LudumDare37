@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Wind : MonoBehaviour {
-    public float windSpeed = 20f;
+    public float windSpeed = 35f;
 
 	// Use this for initialization
 	void Start () {
