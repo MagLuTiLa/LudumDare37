@@ -3,7 +3,7 @@ using UnityEngine.Networking;
 
 public class FlyMover : MonoBehaviour
 {
-    public float FlapForwardSpeed = 5;
+    public float MaxForwardSpeed = 5;
     public float FlapUpwardSpeed = 5;
 
     public float RotationSpeed = 5;
@@ -16,7 +16,10 @@ public class FlyMover : MonoBehaviour
     //input
     private float _horRotation;
     private float _vertRotation;
+    public float _forwardSpeed;
     private bool _shouldFlap;
+
+    public bool isGrounded;
 
     void Start()
     {
@@ -27,40 +30,46 @@ public class FlyMover : MonoBehaviour
     void Update()
     {
         ReadInput();
+        isGrounded = IsGrounded();
     }
 
     private void ReadInput()
     {
         //flappy upward input
-        _shouldFlap = Input.GetKeyDown(KeyCode.Space);
+        _shouldFlap = Input.GetKey(KeyCode.Space);
 
         //rotation input
-        _horRotation += Input.GetAxis("Horizontal")*RotationSpeed;
-        _vertRotation += Input.GetAxis("Vertical")*RotationSpeed;
+        _horRotation += Input.GetAxis("Mouse X") * RotationSpeed;
+        _vertRotation -= Input.GetAxis("Mouse Y") * RotationSpeed;
+
+        //forward input
+        _forwardSpeed = Mathf.Clamp(_forwardSpeed + Input.GetAxis("Vertical"), 1, MaxForwardSpeed);
     }
 
     void FixedUpdate()
     {
-        if(_shouldFlap)
+        if (_shouldFlap)
             Flap();
 
         ApplyRotation();
-        CapVelocity();
+        if (!IsGrounded())
+            ApplySpeed();
+        else
+            StopMoving();
     }
 
     private void CapVelocity()
     {
         if (_rigidbody.velocity.magnitude < MinVelocity)
-            _rigidbody.velocity =Vector3.zero;
+            _rigidbody.velocity = Vector3.zero;
     }
 
     /// <summary>
     /// Applies the constant forward movement.
     /// </summary>
-    private void Flap() 
+    private void Flap()
     {
-        _rigidbody.AddForce(transform.up * FlapUpwardSpeed);
-        _rigidbody.AddForce(transform.forward * FlapForwardSpeed);
+        _rigidbody.AddForce(transform.up * FlapUpwardSpeed, ForceMode.Impulse);
     }
 
     /// <summary>
@@ -69,5 +78,24 @@ public class FlyMover : MonoBehaviour
     private void ApplyRotation()
     {
         transform.localRotation = Quaternion.Euler(_vertRotation, _horRotation, 0);
+    }
+
+    private void ApplySpeed()
+    {
+        _rigidbody.AddForce(transform.forward * _forwardSpeed);
+    }
+
+    private void StopMoving()
+    {
+        _rigidbody.velocity = Vector3.zero;
+        _forwardSpeed = 0;
+    }
+
+    bool IsGrounded()
+    {
+        RaycastHit hitInfo;
+        Physics.Raycast(transform.position, Vector3.down, out hitInfo, GetComponent<SphereCollider>().radius / 2);
+
+        return hitInfo.collider != null;
     }
 }
