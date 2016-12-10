@@ -11,6 +11,7 @@ public class OpenWindowRandomizer : MonoBehaviour
     public string WindowTag = "Window";
 
     public GameObject[] Windows;
+    public GameObject ChosenWindow;
     
 	void Start ()
 	{
@@ -46,6 +47,7 @@ public class OpenWindowRandomizer : MonoBehaviour
     /// <param name="window">the window</param>
     private void OpenWindow(GameObject window)
     {
+        ChosenWindow = window;
         Collider windowCollider = window.GetComponent<Collider>();  
 
         if(windowCollider == null)
