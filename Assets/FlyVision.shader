@@ -62,13 +62,13 @@ Shader "Hidden/FlyVision"
 
 				float2 h1 = hexCenter(grid, odd);
 				float2 h2 = hexCenter(grid + int2(1,0), odd);
-				float2 h3 = hexCenter(grid + int2(1, odd),1 ^ odd);
+				float2 h3 = hexCenter(grid + int2(odd, 1), 1^odd);
 
 				float d1 = (h1.x - i.uv.x)*(h1.x - i.uv.x) + (h1.y - i.uv.y)*(h1.y - i.uv.y);
 				float d2 = (h2.x - i.uv.x)*(h2.x - i.uv.x) + (h2.y - i.uv.y)*(h2.y - i.uv.y);
 				float d3 = (h3.x - i.uv.x)*(h3.x - i.uv.x) + (h3.y - i.uv.y)*(h3.y - i.uv.y);
 				//fixed4 col = fixed4(d3/R , 0, 0, 1);
-				
+				float d = d1;
 				if (d2 < d1)
 				{
 					d1 = d2;
@@ -85,7 +85,7 @@ Shader "Hidden/FlyVision"
 				uv.y += R;
 				//fixed4 col = fixed4(odd, 0, 0, 1);
 				fixed4 col = tex2D(_MainTex, uv);
-				col.x = odd;
+				//col.x = 1-sqrt(d3)/R;
 				return col;
 			}
 			ENDCG
