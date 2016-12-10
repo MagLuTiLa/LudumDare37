@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Wind : MonoBehaviour {
-    public float windSpeed = 35f;
+    public float windSpeed = 50;
+    private float tubeLenght;
+    private Vector3 beginTube;
 
 	// Use this for initialization
 	void Start () {
-		
+        tubeLenght = transform.localScale.y;
+        beginTube = transform.position - (transform.up * (tubeLenght / 2));
 	}
 
     void OnTriggerStay(Collider col)
@@ -15,7 +18,8 @@ public class Wind : MonoBehaviour {
         if (col.tag == "Player")
         {
             Rigidbody rb = col.gameObject.GetComponent<Rigidbody>();
-            rb.AddForce(transform.up * windSpeed);
+            Vector3 playerDistance = col.transform.position - beginTube;
+            rb.AddForce(transform.up * Mathf.Lerp(windSpeed, 0, playerDistance.magnitude / tubeLenght));
         }
     }
 
