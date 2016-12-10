@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityStandardAssets.Utility.Inspector;
+﻿using UnityEngine;
 
 public class FlyMover : MonoBehaviour
 {
