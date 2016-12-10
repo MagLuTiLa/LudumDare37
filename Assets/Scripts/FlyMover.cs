@@ -47,7 +47,7 @@ public class FlyMover : MonoBehaviour
     /// <summary>
     /// Applies the constant forward movement.
     /// </summary>
-    private void Flap()
+    private void Flap() 
     {
         _rigidbody.AddForce(transform.up * FlapUpwardSpeed);
         _rigidbody.AddForce(transform.forward * FlapForwardSpeed);
