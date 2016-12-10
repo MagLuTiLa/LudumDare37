@@ -17,7 +17,7 @@ Shader "Hidden/FlyVision"
 			#pragma vertex vert
 			#pragma fragment frag
 
-			#define R .25
+			#define R .1
 			#define SQRT3 1.732050807
 
 			#include "UnityCG.cginc"
@@ -45,7 +45,7 @@ Shader "Hidden/FlyVision"
 			float2 hexCenter(float2 id, int odd)
 			{
 				return float2(
-					SQRT3 * R * (id.x + .5*odd),
+					SQRT3 * R * (id.x +.5*odd),
 					1.5 * id.y * R
 					);
 			}
@@ -58,16 +58,16 @@ Shader "Hidden/FlyVision"
 				int2 grid;
 				grid.y = i.uv.y / (1.5*R);
 				int odd = grid.y&1;
-				grid.x = i.uv.x / (SQRT3 * R) -odd*.5;
+				grid.x = i.uv.x / (SQRT3 * R) - odd*.5;
 
 				float2 h1 = hexCenter(grid, odd);
 				float2 h2 = hexCenter(grid + int2(1,0), odd);
-				float2 h3 = hexCenter(grid + int2(1, odd), odd);
+				float2 h3 = hexCenter(grid + int2(1, odd),1 ^ odd);
 
 				float d1 = (h1.x - i.uv.x)*(h1.x - i.uv.x) + (h1.y - i.uv.y)*(h1.y - i.uv.y);
 				float d2 = (h2.x - i.uv.x)*(h2.x - i.uv.x) + (h2.y - i.uv.y)*(h2.y - i.uv.y);
 				float d3 = (h3.x - i.uv.x)*(h3.x - i.uv.x) + (h3.y - i.uv.y)*(h3.y - i.uv.y);
-				fixed4 col = fixed4(h1.x-1 , 1, 0, 1);
+				//fixed4 col = fixed4(d3/R , 0, 0, 1);
 				
 				if (d2 < d1)
 				{
@@ -83,8 +83,9 @@ Shader "Hidden/FlyVision"
 				float2 uv = i.uv - h1;
 				uv.x += .5 * SQRT3*R;
 				uv.y += R;
-				//fixed4 col = fixed4(h1.x / 5, h1.y / 5, 0, 1);
-				//fixed4 col = tex2D(_MainTex, uv);
+				//fixed4 col = fixed4(odd, 0, 0, 1);
+				fixed4 col = tex2D(_MainTex, uv);
+				col.x = odd;
 				return col;
 			}
 			ENDCG
