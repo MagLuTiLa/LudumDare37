@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 
 public class FlyMover : MonoBehaviour
 {
@@ -8,20 +9,20 @@ public class FlyMover : MonoBehaviour
     private Rigidbody _rigidbody;
 
     //input
-    private Vector3 _rotation;
+    private Quaternion _rotation;
 	void Start()
 	{
 	    _rigidbody = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
-	void Update()
-	{
-	    float hor = Input.GetAxis("Horizontal");
-	    float vert = Input.GetAxis("Vertical");
+    void Update()
+    {
+        float hor = Input.GetAxis("Horizontal")*RotationSpeed;
+        float vert = Input.GetAxis("Vertical")*RotationSpeed;
 
-	    _rotation = new Vector3(vert, hor);
-	}
+        _rotation = Quaternion.Euler(vert, hor, 0);
+    }
 
     void FixedUpdate()
     {
@@ -42,6 +43,7 @@ public class FlyMover : MonoBehaviour
     /// </summary>
     private void ApplyRotation()
     {
-        transform.Rotate(_rotation * RotationSpeed);
+        transform.localRotation *= _rotation;
+
     }
 }
