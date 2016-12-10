@@ -3,14 +3,20 @@ using UnityEngine.Networking;
 
 public class FlyMover : MonoBehaviour
 {
-    public float ConstantForwardSpeed = 5;
+    public float FlapForwardSpeed = 5;
+    public float FlapUpwardSpeed = 5;
+
     public float RotationSpeed = 5;
+
+    public float MinVelocity = 0.05f;
+
     //components
     private Rigidbody _rigidbody;
 
     //input
-    private float _horRotation = 0;
-    private float _vertRotation = 0;
+    private float _horRotation;
+    private float _vertRotation;
+    private bool _shouldFlap;
 
     void Start()
     {
@@ -20,22 +26,41 @@ public class FlyMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ReadInput();
+    }
+
+    private void ReadInput()
+    {
+        //flappy upward input
+        _shouldFlap = Input.GetKeyDown(KeyCode.Space);
+
+        //rotation input
         _horRotation += Input.GetAxis("Horizontal")*RotationSpeed;
         _vertRotation += Input.GetAxis("Vertical")*RotationSpeed;
     }
 
     void FixedUpdate()
     {
-        ApplyForwardMovement();
+        if(_shouldFlap)
+            Flap();
+
         ApplyRotation();
+        CapVelocity();
+    }
+
+    private void CapVelocity()
+    {
+        if (_rigidbody.velocity.magnitude < MinVelocity)
+            _rigidbody.velocity =Vector3.zero;
     }
 
     /// <summary>
     /// Applies the constant forward movement.
     /// </summary>
-    private void ApplyForwardMovement()
+    private void Flap() 
     {
-        _rigidbody.AddForce(transform.forward*ConstantForwardSpeed);
+        _rigidbody.AddForce(transform.up * FlapUpwardSpeed);
+        _rigidbody.AddForce(transform.forward * FlapForwardSpeed);
     }
 
     /// <summary>

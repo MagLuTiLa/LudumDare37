@@ -37,6 +37,12 @@ ModelImporter:
     4300006: Leg2
     4300008: Leg3
     4300010: Leg4
+    6400000: Chair
+    6400002: Cube
+    6400004: Leg1
+    6400006: Leg2
+    6400008: Leg3
+    6400010: Leg4
   materials:
     importMaterials: 1
     materialName: 0
@@ -63,7 +69,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
