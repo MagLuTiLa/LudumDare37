@@ -9,8 +9,8 @@ public class FlyMover : MonoBehaviour
     private Rigidbody _rigidbody;
 
     //input
-    private float horizontal = 0;
-    private float vertical = 0;
+    private float _horRotation = 0;
+    private float _vertRotation = 0;
 
     void Start()
     {
@@ -20,8 +20,8 @@ public class FlyMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontal += Input.GetAxis("Horizontal")*RotationSpeed;
-        vertical += Input.GetAxis("Vertical")*RotationSpeed;
+        _horRotation += Input.GetAxis("Horizontal")*RotationSpeed;
+        _vertRotation += Input.GetAxis("Vertical")*RotationSpeed;
     }
 
     void FixedUpdate()
@@ -43,6 +43,6 @@ public class FlyMover : MonoBehaviour
     /// </summary>
     private void ApplyRotation()
     {
-        transform.localRotation = Quaternion.Euler(vertical, horizontal, 0);
+        transform.localRotation = Quaternion.Euler(_vertRotation, _horRotation, 0);
     }
 }
