@@ -16,7 +16,7 @@ public class FlyMover : MonoBehaviour
     //input
     private float _horRotation;
     private float _vertRotation;
-    public float _forwardSpeed;
+    private float _forwardSpeed;
     private bool _shouldFlap;
 
     public bool isGrounded;
@@ -24,6 +24,9 @@ public class FlyMover : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _forwardSpeed = MaxForwardSpeed;
+
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -41,9 +44,6 @@ public class FlyMover : MonoBehaviour
         //rotation input
         _horRotation += Input.GetAxis("Mouse X") * RotationSpeed;
         _vertRotation -= Input.GetAxis("Mouse Y") * RotationSpeed;
-
-        //forward input
-        _forwardSpeed = Mathf.Clamp(_forwardSpeed + Input.GetAxis("Vertical"), 1, MaxForwardSpeed);
     }
 
     void FixedUpdate()
@@ -69,7 +69,7 @@ public class FlyMover : MonoBehaviour
     /// </summary>
     private void Flap()
     {
-        _rigidbody.AddForce(transform.up * FlapUpwardSpeed, ForceMode.Impulse);
+        _rigidbody.AddForce(transform.up * FlapUpwardSpeed);
     }
 
     /// <summary>
@@ -77,11 +77,12 @@ public class FlyMover : MonoBehaviour
     /// </summary>
     private void ApplyRotation()
     {
-        transform.localRotation = Quaternion.Euler(_vertRotation, _horRotation, 0);
+        transform.rotation = Quaternion.Euler(_vertRotation, _horRotation, 0);
     }
 
     private void ApplySpeed()
     {
+        _forwardSpeed = MaxForwardSpeed;
         _rigidbody.AddForce(transform.forward * _forwardSpeed);
     }
 
