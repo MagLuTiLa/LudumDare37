@@ -25,6 +25,10 @@ ModelImporter:
     4300002: Sit
     4300004: ArmrestL
     4300006: ArmrestR
+    6400000: ArmrestL
+    6400002: ArmrestR
+    6400004: //RootNode
+    6400006: Sit
   materials:
     importMaterials: 1
     materialName: 0
@@ -51,7 +55,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
