@@ -7,6 +7,9 @@ public class FlyMover : MonoBehaviour
     public float FlapUpwardSpeed = 5;
 
     public float RotationSpeed = 5;
+
+    public float MinVelocity = 0.05f;
+
     //components
     private Rigidbody _rigidbody;
 
@@ -42,6 +45,13 @@ public class FlyMover : MonoBehaviour
             Flap();
 
         ApplyRotation();
+        CapVelocity();
+    }
+
+    private void CapVelocity()
+    {
+        if (_rigidbody.velocity.magnitude < MinVelocity)
+            _rigidbody.velocity =Vector3.zero;
     }
 
     /// <summary>
