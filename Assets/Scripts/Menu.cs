@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-
+    public GameObject swatSelector;
     public Image background;
 
     void Start()
@@ -13,8 +13,23 @@ public class Menu : MonoBehaviour
         background.rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
     }
 
-    public void ClickedOnStart()
+    private void Update()
     {
-        Application.LoadLevel("The Room");
+        swatSelector.transform.position = Input.mousePosition + new Vector3(500, 0);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            swatSelector.SendMessage("Swat");
+        }
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("The Room");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
