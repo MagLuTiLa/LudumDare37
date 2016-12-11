@@ -1,41 +1,15 @@
 fileFormatVersion: 2
-guid: 8d0b13370e245264fb56f37d94752a8f
+guid: 3f508d526fe066948afda5112f1a25bf
+timeCreated: 1481470376
+licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Center
-    100002: Cylinder
-    100004: Fan1
-    100006: Fan2
-    100008: Fan3
-    100010: Stand
-    100012: //RootNode
-    400000: Center
-    400002: Cylinder
-    400004: Fan1
-    400006: Fan2
-    400008: Fan3
-    400010: Stand
-    400012: //RootNode
-    2300000: Center
-    2300002: Cylinder
-    2300004: Fan1
-    2300006: Fan2
-    2300008: Fan3
-    2300010: Stand
-    3300000: Center
-    3300002: Cylinder
-    3300004: Fan1
-    3300006: Fan2
-    3300008: Fan3
-    3300010: Stand
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: Cylinder
-    4300002: Stand
-    4300004: Fan3
-    4300006: Center
-    4300008: Fan2
-    4300010: Fan1
-    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -60,7 +34,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -98,7 +72,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

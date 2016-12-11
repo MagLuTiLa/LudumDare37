@@ -97,8 +97,15 @@ public class FlyController : MonoBehaviour
         _rigidbody.velocity = Vector3.zero;
         _forwardSpeed = 0;
 
-        if(_flyingSound.IsPlaying)
+        if (_flyingSound.IsPlaying)
             _flyingSound.FadeOut(0.2f);
+    }
+
+    private void Bump()
+    {
+        _rigidbody.AddForce(-transform.forward * 10, ForceMode.Impulse);
+        _forwardSpeed = 0;
+        SoundManager.PlaySound("Pok", Random.Range(0.8f, 1.2f), 2);
     }
 
     bool IsGrounded()
@@ -111,11 +118,9 @@ public class FlyController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider != null && _rigidbody.velocity.magnitude > 1)
+        if (collision.collider != null && !IsGrounded())
         {
-            _rigidbody.AddForce(-transform.forward * 15, ForceMode.Impulse);
-            _forwardSpeed = 0;
-            SoundManager.PlaySound("Pok", Random.Range(0.8f, 1.2f), 2);
+            Bump();
         }
     }
 }
