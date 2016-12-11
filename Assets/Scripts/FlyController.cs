@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
-public class FlyMover : MonoBehaviour
+public class FlyController : MonoBehaviour
 {
     public float MaxForwardSpeed = 5;
     public float FlapUpwardSpeed = 5;
@@ -12,6 +12,7 @@ public class FlyMover : MonoBehaviour
 
     //components
     private Rigidbody _rigidbody;
+    private FlyingSoundController _flyingSound;
 
     //input
     private float _horRotation;
@@ -24,6 +25,8 @@ public class FlyMover : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _flyingSound = GetComponent<FlyingSoundController>();
+
         _forwardSpeed = MaxForwardSpeed;
 
         Cursor.visible = false;
@@ -53,7 +56,10 @@ public class FlyMover : MonoBehaviour
 
         ApplyRotation();
         if (!IsGrounded())
+        {
+            _flyingSound.Play();
             ApplySpeed();
+        }
         else
             StopMoving();
     }
@@ -90,6 +96,9 @@ public class FlyMover : MonoBehaviour
     {
         _rigidbody.velocity = Vector3.zero;
         _forwardSpeed = 0;
+
+        if(_flyingSound.IsPlaying)
+            _flyingSound.FadeOut(0.2f);
     }
 
     bool IsGrounded()
