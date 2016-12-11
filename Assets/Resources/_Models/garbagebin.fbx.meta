@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 58e365d0fd12edd4786a1dac44d6266f
-timeCreated: 1481393838
+guid: 75548d3c1dd91774d9ed2cb0a34ea23e
+timeCreated: 1481387818
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -17,6 +17,8 @@ ModelImporter:
     3300002: Sphere
     4300000: Sphere
     4300002: Cylinder
+    6400000: Cylinder
+    6400002: Sphere
   materials:
     importMaterials: 1
     materialName: 0
@@ -43,7 +45,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
