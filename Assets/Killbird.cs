@@ -25,6 +25,7 @@ public class Killbird : MonoBehaviour {
             {
                 target.GetComponent<Hazard>().BirdFood();
                 target.transform.SetParent(transform);
+                target.GetComponent<FlyingSoundController>().FadeOut(3.0f);
                 target = null;
                 cam.GetComponent<OrbitLookat>().tracking = false;
                 cam.GetComponent<FadeCamera>().state = Fade.In;
@@ -34,7 +35,7 @@ public class Killbird : MonoBehaviour {
         }
         else
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(-cam.transform.right), 5.0f * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(-cam.transform.right), 50.0f * Time.deltaTime);
             transform.position += transform.forward * 50.0f * Time.deltaTime;
         }
 	}

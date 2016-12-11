@@ -26,7 +26,7 @@ public class bird : MonoBehaviour
     void flyby()
     {
         GameObject bird = Instantiate(birdPrefab);
-        Vector3 birdSpawnPos = deathcamObject.transform.position + deathcamObject.transform.right * 50.0f;
+        Vector3 birdSpawnPos = deathcamObject.transform.position + deathcamObject.transform.right * 25.0f;
         birdSpawnPos.y += 5.0f;
 
         bird.transform.position = birdSpawnPos;
