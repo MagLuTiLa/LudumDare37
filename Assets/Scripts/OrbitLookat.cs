@@ -5,6 +5,11 @@ using UnityEngine;
 public class OrbitLookat : MonoBehaviour {
 
     [SerializeField]
+    public bool follow = true;
+    [SerializeField]
+    public bool tracking = true;
+
+    [SerializeField]
     GameObject fly;
 
     float distance;
@@ -22,11 +27,15 @@ public class OrbitLookat : MonoBehaviour {
 	void Update () {
         time += Time.deltaTime;
 
-        float x = distance * Mathf.Cos(time * factor);
-        float z = distance * Mathf.Sin(time * factor);
-        Vector3 offset = new Vector3(x, 0, z);
-        transform.position = fly.transform.position + offset;
+        if (follow)
+        {
+            float x = distance * Mathf.Cos(time * factor);
+            float z = distance * Mathf.Sin(time * factor);
+            Vector3 offset = new Vector3(x, 0, z);
+            transform.position = fly.transform.position + offset;
+        }
 
-        transform.rotation = Quaternion.LookRotation(-offset);
+        if (tracking)
+            transform.rotation = Quaternion.LookRotation(fly.transform.position - transform.position);
     }
 }
