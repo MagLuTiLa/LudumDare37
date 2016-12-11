@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CreditScript : MonoBehaviour
 {
-
     // Use this for initialization
     void Start()
     {
@@ -15,5 +14,10 @@ public class CreditScript : MonoBehaviour
     void Update()
     {
 
+    }
+
+    IEnumerator CreditSequence()
+    {
+        yield return null;
     }
 }
