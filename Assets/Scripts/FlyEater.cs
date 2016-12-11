@@ -2,15 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyEater : MonoBehaviour {
+public class FlyEater : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    Animator anim;
+    void Start()
+    {
+        anim = transform.parent.GetComponent<Animator>();
+        Restart();
+    }
+
+    void Restart()
+    {
+        anim.SetBool("Closed", false);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name != "Fly")
+            return;
+
+
+        Animator anim = transform.parent.GetComponent<Animator>();
+        anim.SetBool("Closed", true);
+        // TODO: Kill fly
+    }
 }
