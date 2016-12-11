@@ -82,7 +82,7 @@ public class FlyMover : MonoBehaviour
 
     private void ApplySpeed()
     {
-        _forwardSpeed = MaxForwardSpeed;
+        _forwardSpeed = Mathf.Clamp(_forwardSpeed + 5, 1, MaxForwardSpeed);
         _rigidbody.AddForce(transform.forward * _forwardSpeed);
     }
 
@@ -98,5 +98,15 @@ public class FlyMover : MonoBehaviour
         Physics.Raycast(transform.position, Vector3.down, out hitInfo, GetComponent<SphereCollider>().radius / 2);
 
         return hitInfo.collider != null;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider != null && _rigidbody.velocity.magnitude > 1)
+        {
+            _rigidbody.AddForce(-transform.forward * 15, ForceMode.Impulse);
+            _forwardSpeed = 0;
+            SoundManager.PlaySound("Pok", Random.Range(0.8f, 1.2f), 2);
+        }
     }
 }
