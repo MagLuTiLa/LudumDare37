@@ -42,7 +42,7 @@ public class FlyController : MonoBehaviour
     private void ReadInput()
     {
         //flappy upward input
-        _shouldFlap = Input.GetKey(KeyCode.Space);
+        _shouldFlap = Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space);
 
         //rotation input
         _horRotation += Input.GetAxis("Mouse X") * RotationSpeed;
