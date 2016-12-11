@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Hazard : MonoBehaviour {
     [SerializeField]
-    GameObject restartPrefab;
+    //GameObject restartPrefab;
     Collider killzone;
     public void PlantFood(Collider killzone)
     {
@@ -39,8 +39,11 @@ public class Hazard : MonoBehaviour {
 
     void SpawnRestart()
     {
-        GameObject restartText = Instantiate(restartPrefab, GameObject.Find("Canvas").transform);
-        restartText.transform.localPosition = new Vector3(0, -200, 0);
+
+        GetComponent<FlyingSoundController>().FadeOut(3.0f);
+        GameObject.Find("DeathCam").GetComponent<FadeCamera>().state = Fade.In;
+        // GameObject restartText = Instantiate(restartPrefab, GameObject.Find("Canvas").transform);
+        //restartText.transform.localPosition = new Vector3(0, -200, 0);
 
     }
 }

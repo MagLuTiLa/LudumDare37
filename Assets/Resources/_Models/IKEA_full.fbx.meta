@@ -152,6 +152,34 @@ ModelImporter:
     4300052: Cube.015
     4300054: Cube.016
     4300056: Cylinder.004
+    6400000: Cube
+    6400002: Cube.001
+    6400004: Cube.002
+    6400006: Cube.003
+    6400008: Cube.004
+    6400010: Cube.005
+    6400012: Cube.006
+    6400014: Cube.007
+    6400016: Cube.008
+    6400018: Cube.009
+    6400020: Cube.010
+    6400022: Cube.011
+    6400024: Cube.012
+    6400026: Cube.013
+    6400028: Cube.014
+    6400030: Cube.015
+    6400032: Cube.016
+    6400034: Cylinder
+    6400036: Cylinder.001
+    6400038: Cylinder.002
+    6400040: Cylinder.003
+    6400042: Cylinder.004
+    6400044: Plane
+    6400046: Stand
+    6400048: Stand.001
+    6400050: Stand.002
+    6400052: Vase
+    6400054: Vase.001
   materials:
     importMaterials: 1
     materialName: 0
@@ -178,7 +206,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0

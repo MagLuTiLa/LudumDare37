@@ -60,13 +60,13 @@ Shader "Hidden/FlyVision"
 
 				//Estimate hex coordinate
 				grid.y = i.uv.y / (1.5*R);
-				int odd = grid.y&1;
+				uint odd = grid.y%2;
 				grid.x = i.uv.x / (SQRT3 * R) - odd*.5;
 
 				//Find possible centers of hexagons
 				float2 h1 = hexCenter(grid, odd);
 				float2 h2 = hexCenter(grid + int2(1,0), odd);
-				float2 h3 = hexCenter(grid + int2(odd, 1), 1^odd);
+				float2 h3 = hexCenter(grid + int2(odd, 1), 1-odd);
 
 				//Find closest center
 				float d1 = (h1.x - i.uv.x)*(h1.x - i.uv.x) + (h1.y - i.uv.y)*(h1.y - i.uv.y);
