@@ -47,6 +47,12 @@ public class FlyController : MonoBehaviour
         //rotation input
         _horRotation += Input.GetAxis("Mouse X") * RotationSpeed;
         _vertRotation -= Input.GetAxis("Mouse Y") * RotationSpeed;
+
+        //exit game
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     void FixedUpdate()
