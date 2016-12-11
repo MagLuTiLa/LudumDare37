@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 3b32e572b0176ae44bc820bfbbd312ff
+timeCreated: 1481405333
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: FixedsysTTF
+  fontNames:
+  - FixedsysTTF
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
