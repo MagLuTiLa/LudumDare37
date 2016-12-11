@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Wind : MonoBehaviour {
-    public float windSpeed = 50;
+    public float windSpeed = 300;
     private float tubeLenght;
     private Vector3 beginTube;
 
 	// Use this for initialization
 	void Start () {
-        tubeLenght = transform.localScale.y;
+        tubeLenght = transform.lossyScale.y;
+        //is actually the end position of the tube
         beginTube = transform.position - (transform.up * (tubeLenght / 2));
 	}
 
@@ -35,6 +36,5 @@ public class Wind : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+    }
 }
