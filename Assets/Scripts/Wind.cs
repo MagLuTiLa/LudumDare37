@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wind : MonoBehaviour {
+public class Wind : MonoBehaviour
+{
     public float windSpeed = 300;
     public bool active = true;
     private float tubeLenght;
     private Vector3 beginTube;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         tubeLenght = transform.lossyScale.y;
         //is actually the end position of the tube
         beginTube = transform.position - (transform.up * (tubeLenght / 2));
-	}
+    }
 
     void OnTriggerStay(Collider col)
     {
@@ -34,13 +36,14 @@ public class Wind : MonoBehaviour {
             rb.angularVelocity = Vector3.zero;
         }
     }
-	
-    public void Toggle()
+
+    public void Toggle(bool activated)
     {
-        active = !active;
+        active = activated;
     }
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update()
+    {
     }
 }

@@ -13,22 +13,22 @@ public class FanRotator : MonoBehaviour
     //components
     private Rigidbody _rigidbody;
 
-    public void Toggle()
+    public void Toggle(bool activated)
     {
-        active = !active;
+        active = activated;
         GetComponent<AudioSource>().enabled = active;
     }
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _rigidbody.maxAngularVelocity= MaxAngularVelocity;
+        _rigidbody.maxAngularVelocity = MaxAngularVelocity;
         GetComponent<AudioSource>().enabled = active;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         _rigidbody.maxAngularVelocity = MaxAngularVelocity;
         if (active)

@@ -11,7 +11,7 @@ public class Button : MonoBehaviour
 
     public Color On = new Color(0, 1, 0);
     public Color Off = new Color(1, 0, 0);
-    public bool State = true;
+    public bool isActivated = true;
 
     private Renderer _rend;
 
@@ -21,7 +21,7 @@ public class Button : MonoBehaviour
         _rend = GetComponent<Renderer>();
 
         if (ChangeColor)
-            _rend.material.color = (State ? On : Off);
+            _rend.material.color = (isActivated ? On : Off);
     }
 
     // Update is called once per frame
@@ -34,11 +34,11 @@ public class Button : MonoBehaviour
     {
         if (collision.collider != null)
         {
-            foreach(GameObject obj in Obj)
-                obj.BroadcastMessage("Toggle");
-            State = !State;
+            isActivated = !isActivated;
+            foreach (GameObject obj in Obj)
+                obj.BroadcastMessage("Toggle", isActivated);
             if (ChangeColor)
-                _rend.material.color = ( State ? On : Off);
+                _rend.material.color = (isActivated ? On : Off);
         }
     }
 }
