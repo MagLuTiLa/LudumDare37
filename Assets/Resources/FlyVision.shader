@@ -100,7 +100,7 @@ Shader "Hidden/FlyVision"
 
 
 				//fixed4 col = fixed4(odd, 0, 0, 1);
-				fixed4 col = tex2D(_MainTex, uv) - length(2*uv-1)*.6;
+				fixed4 col = max(0, tex2D(_MainTex, uv) - length(2*uv-1)*.6);
 
 				//Reduce Reb chanel
 				col.x = sqrt( 16 * col.x)/12;
