@@ -7,12 +7,13 @@ public class Wind : MonoBehaviour {
     public bool active = true;
     private float tubeLenght;
     private Vector3 beginTube;
+    private AudioSource windSound;
 
 	// Use this for initialization
 	void Start () {
         tubeLenght = transform.lossyScale.y;
-        //is actually the end position of the tube
         beginTube = transform.position - (transform.up * (tubeLenght / 2));
+        windSound = GetComponentInParent<AudioSource>();
 	}
 
     void OnTriggerStay(Collider col)
@@ -40,7 +41,20 @@ public class Wind : MonoBehaviour {
         active = !active;
     }
 
+    void SoundManager()
+    {
+        if (!active)
+        {
+            windSound.volume = 0f;
+        }
+        else
+        {
+            windSound.volume = 1f;
+        }
+    }
+
 	// Update is called once per frame
 	void Update () {
+        SoundManager();
     }
 }
