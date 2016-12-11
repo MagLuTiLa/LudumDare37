@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Wind : MonoBehaviour {
     public float windSpeed = 300;
+    public bool active = true;
     private float tubeLenght;
     private Vector3 beginTube;
 
@@ -16,7 +17,7 @@ public class Wind : MonoBehaviour {
 
     void OnTriggerStay(Collider col)
     {
-        if (col.tag == "Player")
+        if (col.tag == "Player" && active)
         {
             Rigidbody rb = col.gameObject.GetComponent<Rigidbody>();
             Vector3 playerDistance = col.transform.position - beginTube;
@@ -26,7 +27,7 @@ public class Wind : MonoBehaviour {
 
     void OnTriggerExit(Collider col)
     {
-        if (col.tag == "Player")
+        if (col.tag == "Player" && active)
         {
             Rigidbody rb = col.gameObject.GetComponent<Rigidbody>();
             rb.velocity = Vector3.zero;
@@ -34,6 +35,11 @@ public class Wind : MonoBehaviour {
         }
     }
 	
+    public void Toggle()
+    {
+        active = !active;
+    }
+
 	// Update is called once per frame
 	void Update () {
     }
