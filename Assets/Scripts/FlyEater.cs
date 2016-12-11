@@ -24,6 +24,6 @@ public class FlyEater : MonoBehaviour
 
         Animator anim = transform.parent.GetComponent<Animator>();
         anim.SetTrigger("Close");
-        other.gameObject.GetComponent<Hazard>().Eaten(other);
+        other.gameObject.GetComponent<Hazard>().PlantFood(GetComponent<Collider>());
     }
 }
