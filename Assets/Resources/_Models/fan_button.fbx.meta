@@ -1,47 +1,15 @@
 fileFormatVersion: 2
-guid: 6043fdf58b4bc3f43a3d70e544724c21
-timeCreated: 1481461638
+guid: fa7cf1d0188c89a4e8b204cd02f48baa
+timeCreated: 1481472965
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Button
-    100002: Center
-    100004: Cylinder
-    100006: Fan1
-    100008: Fan2
-    100010: Fan3
-    100012: Stand
-    100014: //RootNode
-    400000: Button
-    400002: Center
-    400004: Cylinder
-    400006: Fan1
-    400008: Fan2
-    400010: Fan3
-    400012: Stand
-    400014: //RootNode
-    2300000: Button
-    2300002: Center
-    2300004: Cylinder
-    2300006: Fan1
-    2300008: Fan2
-    2300010: Fan3
-    2300012: Stand
-    3300000: Button
-    3300002: Center
-    3300004: Cylinder
-    3300006: Fan1
-    3300008: Fan2
-    3300010: Fan3
-    3300012: Stand
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: Button
-    4300002: Cylinder
-    4300004: Stand
-    4300006: Fan3
-    4300008: Center
-    4300010: Fan2
-    4300012: Fan1
   materials:
     importMaterials: 1
     materialName: 0
