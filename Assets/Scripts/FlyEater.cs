@@ -14,7 +14,6 @@ public class FlyEater : MonoBehaviour
 
     void Restart()
     {
-        anim.SetBool("Closed", false);
     }
 
     void OnTriggerEnter(Collider other)
@@ -24,7 +23,7 @@ public class FlyEater : MonoBehaviour
 
 
         Animator anim = transform.parent.GetComponent<Animator>();
-        anim.SetBool("Closed", true);
-        other.gameObject.GetComponent<Hazard>().Eaten(other);
+        anim.SetTrigger("Close");
+        other.gameObject.GetComponent<Hazard>().PlantFood(GetComponent<Collider>());
     }
 }
