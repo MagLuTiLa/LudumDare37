@@ -33,5 +33,8 @@ public class FadeCamera : MonoBehaviour
         GUI.color = guiColor;
         GUI.depth = drawDepth;
         GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), fadeTexture);
+
+        if (alpha >= 1)
+            Application.LoadLevel("Credits");
     }
 }
