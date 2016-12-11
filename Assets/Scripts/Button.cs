@@ -5,7 +5,7 @@ using UnityEngine;
 public class Button : MonoBehaviour
 {
 
-    public GameObject Obj;
+    public GameObject[] Obj = new GameObject[0];
 
     public bool ChangeColor;
 
@@ -34,7 +34,8 @@ public class Button : MonoBehaviour
     {
         if (collision.collider != null)
         {
-            Obj.BroadcastMessage("Toggle");
+            foreach(GameObject obj in Obj)
+                obj.BroadcastMessage("Toggle");
             State = !State;
             if (ChangeColor)
                 _rend.material.color = ( State ? On : Off);
