@@ -16,7 +16,7 @@ public class OrbitLookat : MonoBehaviour {
     float time = 0.0f;
 
     [SerializeField]
-    float factor = 1.0f;
+    float factor = 0.5f;
 
 	// Use this for initialization
 	void Start () {
