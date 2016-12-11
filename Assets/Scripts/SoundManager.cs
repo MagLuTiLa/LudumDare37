@@ -105,7 +105,7 @@ public class SoundManager : MonoBehaviour
         if (clip == null)
             new Exception("Could not find sound of name: " + name);
 
-        PlayClipInstance(clip, pitch, musicVolume, loop);
+        PlayClipInstance(clip, pitch, volume, loop);
     }
 
     /// <summary>

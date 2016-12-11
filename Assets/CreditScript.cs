@@ -11,7 +11,7 @@ public class CreditScript : MonoBehaviour
     void Start()
     {
         GetComponent<AudioSource>().time = 8.0f;
-        Invoke("ShowBackToMenu", 4.75f);
+        Invoke("ShowBackToMenu", 4.0f);
     }
 
     // Update is called once per frame
