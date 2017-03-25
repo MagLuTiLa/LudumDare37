@@ -8,11 +8,11 @@ public class FlyVision : MonoBehaviour {
     // Creates a private material used to the effect
     void Awake()
     {
-        material = new Material(Shader.Find("Hidden/FlyVision"));
+        //material = new Material(Shader.Find("Hidden/FlyVision"));
     }
     void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
-        Graphics.Blit(source, destination, material);
+        //Graphics.Blit(source, destination, material);
     }
 	
 }

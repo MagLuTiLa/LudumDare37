@@ -24,7 +24,12 @@ public class FlyController : MonoBehaviour
 
     void Start()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+#if UNITY_ANDROID
+		Input.gyro.enabled = true;
+#elif UNITY_IOS
+		Input.gyro.enabled = true;
+#endif
+		_rigidbody = GetComponent<Rigidbody>();
         _flyingSound = GetComponent<FlyingSoundController>();
 
         _forwardSpeed = MaxForwardSpeed;
@@ -39,23 +44,42 @@ public class FlyController : MonoBehaviour
         isGrounded = IsGrounded();
     }
 
-    private void ReadInput()
-    {
-        //flappy upward input
-        _shouldFlap = Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space);
+	private void ReadInput()
+	{
+#if UNITY_ANDROID
+		ReadInputMobile();
+#elif UNITY_IOS
+		ReadInputMobile();
+#else
+		ReadInputDesktop();
+#endif
+	}
+	private void ReadInputDesktop()
+	{
+		//flappy upward input
+		_shouldFlap = Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space);
 
-        //rotation input
-        _horRotation += Input.GetAxis("Mouse X") * RotationSpeed;
-        _vertRotation -= Input.GetAxis("Mouse Y") * RotationSpeed;
+		//rotation input
+		_horRotation += Input.GetAxis("Mouse X") * RotationSpeed;
+		_vertRotation -= Input.GetAxis("Mouse Y") * RotationSpeed;
 
-        //exit game
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
-    }
+		//exit game
+		if (Input.GetKey(KeyCode.Escape))
+		{
+			Application.Quit();
+		}
+	}
+	private void ReadInputMobile()
+	{
+		//flappy upward input
+		_shouldFlap = Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space);
 
-    void FixedUpdate()
+		//rotation input
+		_horRotation += Input.gyro.rotationRate.y * -10.0f * RotationSpeed;
+		_vertRotation += Input.gyro.rotationRate.x * -10.0f * RotationSpeed;
+	}
+
+	void FixedUpdate()
     {
         if (_shouldFlap)
             Flap();
